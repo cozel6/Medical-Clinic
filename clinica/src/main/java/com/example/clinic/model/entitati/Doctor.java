@@ -26,4 +26,14 @@ public class Doctor extends com.example.clinic.model.abstracte.Persoana {
         this.specializare = specializare;
         this.necesitaRecomandare = necesitaRecomandare;
     }
+
+    // getteri si setteri
+    public String getSpecializare() {return specializare;}
+    public void setSpecializare(String specializare) {this.specializare = specializare;}
+    
+    public boolean isNecesitaRecomandare() {return necesitaRecomandare;}
+    public void setNecesitaRecomandare(boolean necesitaRecomandare) {this.necesitaRecomandare = necesitaRecomandare;}
+    
+    public List<Programare> getProgramari() {return programari;}
+    public void setProgramari(List<Programare> programari) {this.programari = programari;}
 }
