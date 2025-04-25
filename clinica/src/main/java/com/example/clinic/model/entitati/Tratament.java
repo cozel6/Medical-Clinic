@@ -25,7 +25,8 @@ public class Tratament {
     public Tratament(Long id, String descriere, LocalDateTime dataPrescriptie) {
         this.id = id; this.descriere = descriere; this.dataPrescriptie = dataPrescriptie;
     }
-
+    
+    // getteri și setteri
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
     public String getDescriere() { return descriere; }

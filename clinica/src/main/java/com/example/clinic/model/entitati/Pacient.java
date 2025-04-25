@@ -1,9 +1,14 @@
 package com.example.clinic.model.entitati;
 
-import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Lob;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "pacienti")
@@ -17,7 +22,6 @@ public class Pacient extends com.example.clinic.model.abstracte.Persoana {
     @OneToMany(mappedBy = "pacient", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Programare> programari = new ArrayList<>();
 
-    // Constructor gol și complete
     public Pacient() {}
     public Pacient(Long id, String nume, String prenume, String email,
                    LocalDate dataNasterii, String alergii, String istoricMedical) {
@@ -27,7 +31,8 @@ public class Pacient extends com.example.clinic.model.abstracte.Persoana {
         this.istoricMedical = istoricMedical;
     }
 
-    // Getteri/Setteri
+    // getteri și setteri
+
     public LocalDate getDataNasterii() { return dataNasterii; }
     public void setDataNasterii(LocalDate dataNasterii) { this.dataNasterii = dataNasterii; }
     public String getAlergii() { return alergii; }

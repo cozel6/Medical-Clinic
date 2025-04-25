@@ -1,16 +1,18 @@
 package com.example.clinic.model.entitati;
 
-import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "doctori")
 public class Doctor extends com.example.clinic.model.abstracte.Persoana {
 
-
-    private  String specializare;
+    private String specializare;
     private boolean necesitaRecomandare;
 
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -27,13 +29,16 @@ public class Doctor extends com.example.clinic.model.abstracte.Persoana {
         this.necesitaRecomandare = necesitaRecomandare;
     }
 
-    // getteri si setteri
-    public String getSpecializare() {return specializare;}
-    public void setSpecializare(String specializare) {this.specializare = specializare;}
-    
-    public boolean isNecesitaRecomandare() {return necesitaRecomandare;}
-    public void setNecesitaRecomandare(boolean necesitaRecomandare) {this.necesitaRecomandare = necesitaRecomandare;}
-    
-    public List<Programare> getProgramari() {return programari;}
-    public void setProgramari(List<Programare> programari) {this.programari = programari;}
+    // getteri și setteri
+    public String getSpecializare() { return specializare; }
+    public void setSpecializare(String specializare) { this.specializare = specializare; }
+
+    public boolean isNecesitaRecomandare() { return necesitaRecomandare; }
+    public void setNecesitaRecomandare(boolean necesitaRecomandare) { this.necesitaRecomandare = necesitaRecomandare; }
+
+    public List<Programare> getProgramari() { return programari; }
+    public void setProgramari(List<Programare> programari) { this.programari = programari; }
+
+    public List<Disponibilitate> getDisponibilitati() { return disponibilitati; }
+    public void setDisponibilitati(List<Disponibilitate> disponibilitati) { this.disponibilitati = disponibilitati; }
 }
