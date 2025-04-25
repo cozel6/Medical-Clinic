@@ -398,3 +398,34 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+*persistence.xml
+
+# Maven build output
+target/
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local environment files
+*.env
+*.local
+
+# Java class files
+*.class
+
+# Backup files
+*~
+*.tmp
+
+# Libraries (optional, if you don't want to commit JARs)
+lib/
