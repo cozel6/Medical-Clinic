@@ -27,7 +27,7 @@ public class GenericDAO<T, K> {
     }
 
     public List<T> findAll(){
-        return em.createQuery("FROM" + clazz.getSimpleName(), clazz).getResultList();
+        return em.createQuery("FROM " + clazz.getSimpleName(), clazz).getResultList();
     }
 
     public void update(T ent){

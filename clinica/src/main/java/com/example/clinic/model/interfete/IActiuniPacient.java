@@ -7,5 +7,6 @@ import com.example.clinic.model.entitati.Programare;
 public interface  IActiuniPacient {
     Programare solicitaProgramare(Programare p);
     List<Programare> vizualizeazaIstoric();
+    boolean anuleazaProgramare(Programare p);
     }
 

@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.clinic.model.abstracte.Persoana;
+import com.example.clinic.model.interfete.IActiuniPacient;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Lob;
@@ -12,7 +15,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "pacienti")
-public class Pacient extends com.example.clinic.model.abstracte.Persoana {
+public class Pacient extends Persoana implements IActiuniPacient {
 
     private LocalDate dataNasterii;
     private String alergii;
@@ -41,4 +44,18 @@ public class Pacient extends com.example.clinic.model.abstracte.Persoana {
     public void setIstoricMedical(String istoricMedical) { this.istoricMedical = istoricMedical; }
     public List<Programare> getProgramari() { return programari; }
     public void setProgramari(List<Programare> programari) { this.programari = programari; }
+
+    @Override
+    public Programare solicitaProgramare(Programare p) {
+      p.setPacient(this);
+      programari.add(p);
+      return p;
+    }
+  
+    @Override public List<Programare> vizualizeazaIstoric() { return programari; }
+  
+    @Override
+    public boolean anuleazaProgramare(Programare p) {
+      return programari.remove(p);
+    }
 }
