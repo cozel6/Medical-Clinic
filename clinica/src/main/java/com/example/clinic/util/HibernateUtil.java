@@ -7,7 +7,7 @@ import jakarta.persistence.Persistence;
 
 
 public class HibernateUtil {
-    private  static EntityManagerFactory emf = Persistence.createEntityManagerFactory("clinicPU");
+    private final  static EntityManagerFactory emf = Persistence.createEntityManagerFactory("clinicPU");
     
         public static EntityManager getEntityManager() {
             return emf.createEntityManager();
