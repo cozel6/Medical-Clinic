@@ -64,7 +64,7 @@ public class DoctorService {
 
     }
 
-    public List<Programare> filtrazaProgramareByDate(Long idDoctor, LocalDate data) {
+    public List<Programare> filtreazaProgramariByData(Long idDoctor, LocalDate data) {
         Doctor d = gasesteDoctor(idDoctor);
         return d.getProgramari().stream().filter(pr -> pr.getData().toLocalDate().equals(data)).toList();
     }

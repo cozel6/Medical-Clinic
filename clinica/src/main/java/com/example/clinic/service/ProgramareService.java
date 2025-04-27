@@ -9,21 +9,21 @@ import com.example.clinic.util.HibernateUtil;
 
 import jakarta.persistence.EntityManager;
 
-public class ProgamareSerivce {
+public class ProgramareService {
     private final ProgramareDAO programareDAO;
 
-    public ProgamareSerivce() {
+    public ProgramareService() {
         EntityManager em = HibernateUtil.getEntityManager();
         programareDAO = new ProgramareDAO(em);
     }
-    public Programare salveazProgramare(Programare p){
+    public Programare salveazaProgramare(Programare p){
         programareDAO.save(p);
         return p;
     }
     public List<Programare> listaProgramari(){
         return programareDAO.findAll();
     }
-    public void stergeProgamare(Programare p){
+    public void stergeProgramare(Programare p){
         programareDAO.delete(p);
     }
 }

@@ -10,11 +10,11 @@ import com.example.clinic.util.HibernateUtil;
 
 import jakarta.persistence.EntityManager;
 
-public class PacientSerivce {
+public class PacientService {
     private final PacientDAO pacientDAO;
     private final ProgramareDAO programareDAO;
 
-    public PacientSerivce() {
+    public PacientService() {
         EntityManager em = HibernateUtil.getEntityManager();
         pacientDAO = new PacientDAO(em);
         programareDAO = new ProgramareDAO(em);
@@ -29,13 +29,13 @@ public class PacientSerivce {
     public Pacient gasestePacient(Long id){
         return pacientDAO.find(id);
     }
-    public Programare solicitaProgamare(Long idPacient , Programare pr){
+    public Programare solicitaProgramare(Long idPacient , Programare pr){
         Pacient p = gasestePacient(idPacient);
         pr.setPacient(p);
         programareDAO.save(pr);
         return pr;
     }
-    public boolean anuleazaProgramarea(Long idPacient, Long idProgramare){
+    public boolean anuleazaProgramare(Long idPacient, Long idProgramare){
         Pacient p = gasestePacient(idPacient);
         Programare pr = programareDAO.find(idProgramare);
         if(p != null && pr  != null && p.getProgramari().remove(pr)){
