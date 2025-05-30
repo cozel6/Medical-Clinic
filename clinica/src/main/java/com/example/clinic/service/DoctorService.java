@@ -1,71 +1,60 @@
 package com.example.clinic.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.example.clinic.model.entitati.Doctor;
 import com.example.clinic.model.entitati.Programare;
 import com.example.clinic.model.entitati.Tratament;
-import com.example.clinic.repository.DoctorDAO;
-import com.example.clinic.repository.ProgramareDAO;
-import com.example.clinic.repository.TratamentDAO;
 import com.example.clinic.util.HibernateUtil;
 
-import jakarta.persistence.EntityManager;
-
-public class DoctorService {
-
-    private final DoctorDAO doctorDAO;
-    private final ProgramareDAO programareDAO;
-    private final TratamentDAO tratamentDAO;
+public class DoctorService extends GenericService<Doctor, Long> {
+    private final ProgramareService programareService;
+    private final TratamentService tratamentService;
 
     public DoctorService() {
-        EntityManager em = HibernateUtil.getEntityManager();
-        doctorDAO = new DoctorDAO(em);
-        programareDAO = new ProgramareDAO(em);
-        tratamentDAO = new TratamentDAO(em);
-
+        super(Doctor.class, HibernateUtil.getEntityManager());
+        this.programareService = new ProgramareService();
+        this.tratamentService   = new TratamentService();
     }
 
     public Doctor inregistreazaDoctor(Doctor d) {
-        doctorDAO.save(d);
-        return d;
+        return create(d);
     }
 
     public List<Doctor> listaDoctori() {
-        return doctorDAO.findAll();
+        return readAll();
     }
 
     public Doctor gasesteDoctor(Long id) {
-        return doctorDAO.find(id);
+        return read(id);
     }
 
-    public Programare puneDiagnostic(Long idProgamare, String diagnostic) {
-        Programare pr = programareDAO.find(idProgamare);
+    public Programare puneDiagnostic(Long idProgramare, String diagnostic) {
+        Programare pr = programareService.read(idProgramare);
         if (pr != null) {
             pr.setDiagnostic(diagnostic);
-            programareDAO.update(pr);
-            return pr;
+            return programareService.update(pr);
         }
         return null;
     }
 
     public Tratament prescrieTratament(Long idProgramare, String descriere) {
-        Programare pr = programareDAO.find(idProgramare);
-        if (pr == null) {
-            return null;
-        }
+        Programare pr = programareService.read(idProgramare);
+        if (pr == null) return null;
         Tratament t = new Tratament();
         t.setDescriere(descriere);
-        t.setDataPrescriptie(java.time.LocalDateTime.now());
+        t.setDataPrescriptie(LocalDateTime.now());
         t.setProgramare(pr);
-        tratamentDAO.save(t);
-        return t;
-
+        return tratamentService.create(t);
     }
 
-    public List<Programare> filtrazaProgramareByDate(Long idDoctor, LocalDate data) {
-        Doctor d = gasesteDoctor(idDoctor);
-        return d.getProgramari().stream().filter(pr -> pr.getData().toLocalDate().equals(data)).toList();
+    public List<Programare> filtreazaProgramariByData(Long idDoctor, LocalDate data) {
+        Doctor d = read(idDoctor);
+        return d.getProgramari()
+                .stream()
+                .filter(pr -> pr.getData().toLocalDate().equals(data))
+                .toList();
     }
 }
