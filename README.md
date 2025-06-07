@@ -1,9 +1,12 @@
-Medical-Clinic
+# # Medical-Clinic
 
-Medical-Clinic is a multi-module Java project implementing a simple client-server clinic management system. It uses sockets for communication and Hibernate/JPA with PostgreSQL for persistence.
+**Medical-Clinic** is a multi-module Java project implementing a simple client-server clinic management system. It uses sockets for communication and Hibernate/JPA with PostgreSQL for persistence.
 
-📂 Repository Structure
+---
 
+## 📂 Repository Structure
+
+```text
 Medical-Clinic
 ├── pom.xml                   # Parent POM
 ├── clinica-server            # Server module
@@ -24,108 +27,266 @@ Medical-Clinic
         │       ├── ClinicClient.java
         │       └── Main.java       # Console-based UI
         └── test/java              # (unit tests)
+```
 
-🚀 Features
+---
 
-Patient Operations
+## 🚀 Features
 
-Register Patient: Create a new patient record.
+### Patient Operations
 
-Request Appointment: Schedule a visit with a doctor.
+1. **Register Patient**: Create a new patient record.
+2. **Request Appointment**: Schedule a visit with a doctor.
+3. **Cancel Appointment**: Cancel an existing appointment.
+4. **View Appointments**: List all appointments for a patient.
 
-Cancel Appointment: Cancel an existing appointment.
+### Doctor Operations
 
-View Appointments: List all appointments for a patient.
+1. **Register Doctor**: Create a new doctor record.
+2. **Add Availability**: Specify date and time ranges a doctor is available.
+3. **List Availabilities**: View a doctor’s available slots.
+4. **Set Diagnostic**: Add diagnosis to an appointment.
+5. **Prescribe Treatment**: Attach a treatment to an appointment.
+6. **Filter Appointments**: List appointments for a doctor on a given date.
 
-Doctor Operations
+---
 
-Register Doctor: Create a new doctor record.
+## ⚙️ Prerequisites
 
-Add Availability: Specify date and time ranges a doctor is available.
+* Java 17+
+* Maven 3.6+
+* PostgreSQL database running (default `jdbc:postgresql://localhost:5432/clinicdb`)
 
-List Availabilities: View a doctor’s available slots.
+---
 
-Set Diagnostic: Add diagnosis to an appointment.
+## 🛠️ Building & Running
 
-Prescribe Treatment: Attach a treatment to an appointment.
+1. **Clone repository**:
 
-Filter Appointments: List appointments for a doctor on a given date.
+   ```bash
+   git clone https://github.com/yourusername/Medical-Clinic.git
+   cd Medical-Clinic
+   ```
 
-Persistence
+2. **Configure database** in `clinica-server/src/main/resources/META-INF/persistence.xml`:
 
-Uses Hibernate JPA with PostgreSQL.
+   ```xml
+   <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/clinicdb"/>
+   <property name="jakarta.persistence.jdbc.user" value="postgres"/>
+   <property name="jakarta.persistence.jdbc.password" value="<your-password>"/>
+   ```
 
-Entities: Pacient, Doctor, Programare, Tratament, Disponibilitate.
+3. **Build all modules**:
 
-Configuration in clinica-server/src/main/resources/META-INF/persistence.xml.
+   ```bash
+   mvn clean install
+   ```
 
-⚙️ Prerequisites
+4. **Run Server** (in one terminal):
 
-Java 17+
+   ```bash
+   cd clinica-server
+   mvn exec:java
+   # Server listens on port 5555
+   ```
 
-Maven 3.6+
+5. **Run Client** (in another terminal):
 
-PostgreSQL database running (default jdbc:postgresql://localhost:5432/clinicdb)
+   ```bash
+   cd clinica-client
+   mvn exec:java
+   # Interact via console menu
+   ```
 
-🛠️ Building & Running
+---
 
-Clone repository:
+## 📋 Usage Example
 
-git clone https://github.com/yourusername/Medical-Clinic.git
-cd Medical-Clinic
+**Add a patient**:
 
-Configure database in clinica-server/src/main/resources/META-INF/persistence.xml:
-
-<property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/clinicdb"/>
-<property name="jakarta.persistence.jdbc.user" value="postgres"/>
-<property name="jakarta.persistence.jdbc.password" value="<your-password>"/>
-
-Build all modules:
-
-mvn clean install
-
-Run Server (in one terminal):
-
-cd clinica-server
-mvn exec:java
-# Server listens on port 5555
-
-Run Client (in another terminal):
-
-cd clinica-client
-mvn exec:java
-# Interact via console menu
-
-📋 Usage Example
-
-Add a patient:
-
+```
 1 -> Nume: Popescu
      Prenume: Ion
      Email: ion@mail.com
      Telefon: 0712345678
      Data nasterii: 1980-05-15
+```
 
-Add a doctor:
+**Add a doctor**:
 
+```
+5 -> Nume doctor: Ionescu
+     Prenume doctor: Maria
+     Email doctor: maria@mail.com
+     Specializare: Cardiologie
+     Necesita recomandare: false
+```
+
+**Schedule an appointment**:
+
+```
+2 -> ID pacient: 1
+     ID doctor: 1
+     Data (YYYY-MM-DDTHH:MM): 2025-06-10T14:30
+```
+
+---
+
+## 🤝 Contributing
+
+Contributions welcome! Please fork the repo, create a feature branch, and open a PR.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+**Medical-Clinic** is a multi-module Java project implementing a simple client-server clinic management system. It uses sockets for communication and Hibernate/JPA with PostgreSQL for persistence.
+
+---
+
+## 📂 Repository Structure
+
+```
+Medical-Clinic
+├── pom.xml                   # Parent POM
+├── clinica-server            # Server module
+│   ├── pom.xml
+│   └── src
+│       ├── main
+│       │   ├── java/com/example/clinic
+│       │   │   ├── model           # Entities & interfaces
+│       │   │   ├── service         # Business logic services
+│       │   │   └── server          # ClinicServer & ClientHandler
+│       │   └── resources           # persistence.xml
+│       └── test/java              # (unit tests)
+└── clinica-client            # Client module
+    ├── pom.xml
+    └── src
+        ├── main
+        │   └── java/com/example/clinic/cli
+        │       ├── ClinicClient.java
+        │       └── Main.java       # Console-based UI
+        └── test/java              # (unit tests)
+```
+
+---
+
+## 🚀 Features
+
+### Patient Operations
+
+1. **Register Patient**: Create a new patient record.
+2. **Request Appointment**: Schedule a visit with a doctor.
+3. **Cancel Appointment**: Cancel an existing appointment.
+4. **View Appointments**: List all appointments for a patient.
+
+### Doctor Operations
+
+5. **Register Doctor**: Create a new doctor record.
+6. **Add Availability**: Specify date and time ranges a doctor is available.
+7. **List Availabilities**: View a doctor’s available slots.
+8. **Set Diagnostic**: Add diagnosis to an appointment.
+9. **Prescribe Treatment**: Attach a treatment to an appointment.
+10. **Filter Appointments**: List appointments for a doctor on a given date.
+
+### Persistence
+
+* Uses **Hibernate JPA** with PostgreSQL.
+* Entities: `Pacient`, `Doctor`, `Programare`, `Tratament`, `Disponibilitate`.
+* Configuration in `clinica-server/src/main/resources/META-INF/persistence.xml`.
+
+---
+
+## ⚙️ Prerequisites
+
+* Java 17+
+* Maven 3.6+
+* PostgreSQL database running (default `jdbc:postgresql://localhost:5432/clinicdb`)
+
+---
+
+## 🛠️ Building & Running
+
+1. **Clone repository**:
+
+   ```bash
+   git clone https://github.com/yourusername/Medical-Clinic.git
+   cd Medical-Clinic
+   ```
+
+2. **Configure database** in `clinica-server/src/main/resources/META-INF/persistence.xml`:
+
+   ```xml
+   <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/clinicdb"/>
+   <property name="jakarta.persistence.jdbc.user" value="postgres"/>
+   <property name="jakarta.persistence.jdbc.password" value="<your-password>"/>
+   ```
+
+3. **Build all modules**:
+
+   ```bash
+   mvn clean install
+   ```
+
+4. **Run Server** (in one terminal):
+
+   ```bash
+   cd clinica-server
+   mvn exec:java
+   # Server listens on port 5555
+   ```
+
+5. **Run Client** (in another terminal):
+
+   ```bash
+   cd clinica-client
+   mvn exec:java
+   # Interact via console menu
+   ```
+
+---
+
+## 📋 Usage Example
+
+**Add a patient**:
+
+```
+1 -> Nume: Popescu
+     Prenume: Ion
+     Email: ion@mail.com
+     Telefon: 0712345678
+     Data nasterii: 1980-05-15
+```
+
+**Add a doctor**:
+
+```
 5 -> Nume doctor: Ionescu
      Prenume: Maria
      Email: maria@mail.com
      Specializare: Cardiologie
      Necesita recomandare: false
+```
 
-Schedule an appointment:
+**Schedule an appointment**:
 
+```
 2 -> ID pacient: 1
      ID doctor: 1
      Data (YYYY-MM-DDTHH:MM): 2025-06-10T14:30
      Recomandare familie: false
+```
 
-🤝 Contributing
+---
+
+## 🤝 Contributing
 
 Contributions welcome! Please fork the repo, create a feature branch, and open a PR.
 
-📄 License
+---
+
+## 📄 License
 
 This project is licensed under the MIT License.
-
