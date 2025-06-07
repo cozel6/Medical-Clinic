@@ -7,6 +7,7 @@ import com.example.clinic.model.entitati.Programare;
 import com.example.clinic.util.HibernateUtil;
 
 public class PacientService extends GenericService<Pacient, Long> {
+
     private final ProgramareService programareService;
 
     public PacientService() {
@@ -29,16 +30,20 @@ public class PacientService extends GenericService<Pacient, Long> {
     public Programare solicitaProgramare(Long idPacient, Programare pr) {
         Pacient p = read(idPacient);
         pr.setPacient(p);
+        p.getProgramari().add(pr);
         return programareService.create(pr);
     }
 
     public boolean anuleazaProgramare(Long idPacient, Long idProgramare) {
-        Pacient p = read(idPacient);
         Programare pr = programareService.read(idProgramare);
-        if (p != null && pr != null && p.getProgramari().remove(pr)) {
-            programareService.delete(pr);
-            return true;
+        if (pr == null) {
+            return false;
         }
-        return false;
+        if (pr.getPacient() == null || !pr.getPacient().getId().equals(idPacient)) {
+            return false;
+        }
+        programareService.delete(pr);
+        return true;
     }
+
 }

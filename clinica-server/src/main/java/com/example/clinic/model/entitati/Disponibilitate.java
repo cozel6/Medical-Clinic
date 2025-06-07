@@ -1,11 +1,9 @@
 package com.example.clinic.model.entitati;
 
-import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,8 +19,13 @@ public class Disponibilitate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private DayOfWeek zi;
+    /*Removed
+    --@Enumerated(EnumType.STRING)
+    --private DayOfWeek zi;
+     */
+
+
+    private LocalDate data;
 
     private LocalTime oraInceput;
     private LocalTime oraSfarsit;
@@ -33,19 +36,24 @@ public class Disponibilitate {
 
     public Disponibilitate() {}
 
-    public Disponibilitate(Long id, DayOfWeek zi, LocalTime oraInceput, LocalTime oraSfarsit) {
+    public Disponibilitate(Long id, LocalTime oraInceput, LocalTime oraSfarsit, LocalDate data) {
         this.id = id;
-        this.zi = zi;
         this.oraInceput = oraInceput;
         this.oraSfarsit = oraSfarsit;
+        this.data = data;
     }
 
     // getteri și setteri
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
+    /*
     public DayOfWeek getZi() { return zi; }
-    public void setZi(DayOfWeek zi) { this.zi = zi; }
+    public void setZi(DayOfWeek zi) { this.zi = zi; } 
+    */
+    
+    public LocalDate getData() { return data; }
+    public void setData(LocalDate data) { this.data = data; }
 
     public LocalTime getOraInceput() { return oraInceput; }
     public void setOraInceput(LocalTime oraInceput) { this.oraInceput = oraInceput; }

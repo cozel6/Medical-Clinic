@@ -18,4 +18,9 @@ public class DisponibilitateService extends GenericService<Disponibilitate, Long
     public List<Disponibilitate> listaDisponibilitati() {
         return readAll();
     }
+    public List<Disponibilitate> listaDisponibilitatiByDoctor(Long idDoctor) {
+        return listaDisponibilitati().stream()
+            .filter(d -> d.getDoctor() != null && d.getDoctor().getId().equals(idDoctor))
+            .toList();
+    }
 }
