@@ -132,15 +132,7 @@ Medical-Clinic
 
 ---
 
-## 🤝 Contributing
-
-Contributions welcome! Please fork the repo, create a feature branch, and open a PR.
-
----
-
 ## 📄 License
-
-This project is licensed under the MIT License.
 
 **Medical-Clinic** is a multi-module Java project implementing a simple client-server clinic management system. It uses sockets for communication and Hibernate/JPA with PostgreSQL for persistence.
 
