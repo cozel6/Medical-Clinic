@@ -47,8 +47,6 @@ Medical-Clinic
 3. **List Availabilities**: View a doctor’s available slots.
 4. **Set Diagnostic**: Add diagnosis to an appointment.
 5. **Prescribe Treatment**: Attach a treatment to an appointment.
-6. **Filter Appointments**: List appointments for a doctor on a given date.
-
 ---
 
 ## ⚙️ Prerequisites
